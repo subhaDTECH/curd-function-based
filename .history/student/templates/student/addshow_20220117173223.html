@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<body>
+   <div class="container-fluid bg-dark">
+      <h1 class=" text-center atert alert-info">function based view curd </h1>
+      <div class="row">
+            <div class="col-md-4 m-4 ml-4 p-5">
+                       <form method="POST" novalidate >
+            {% csrf_token %}
+               {% if form %}
+                {% for fm in form %}
+                  <p>{{fm.label_tag}}</p>
+                  {{fm}}
+                 {{fm.error}}
+                
+                
+                
+                {% endfor %}
+                <button class="btn btn-outline-primary mt-2">Add</button>
+
+
+               
+                  {% else %}
+                  not data
+               {% endif %}
+            </form>
+            
+            </div>
+            <div class="col-md-8 mx-auto">
+                <table class="table  table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Password</th>
+      <th scope="col">work</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+   <tbody>
+  {% for dt in data %}
+  
+    
+    <tr>
+      <th scope="row">{{dt.id}}</th>
+      <td>{{dt.name}}</td>
+      <td>{{dt.email}}</td>
+      <td>{{dt.password}}</td>
+       <td>{{dt.work}}</td>
+       <td>
+         <a href="{% url 'updatedata' dt.id %}" class="btn btn-outline-warning">Edit</a>
+         <form action="{% url 'deletedata' dt.id %}" method="POST" class="d-inline">
+         {% csrf_token %}
+         <button type="submit"  class="btn btn-outline-danger">Delete</button>
+         </form>
+          
+       </td>
+    </tr>
+   
+ 
+  
+  {% endfor %}
+   </tbody>
+  
+</table>   
+                        
+            </div>
+          
+
+
+        
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
+</body>
+</html>
